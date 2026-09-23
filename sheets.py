@@ -1,9 +1,11 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
-
+import json
+import base64
 import os
 from dotenv import load_dotenv
+
 
 
 load_dotenv()
@@ -15,7 +17,7 @@ WORKSHEET_NAME = "bot-sheet-users"
 """
 
 SHEET_ID = os.getenv('SHEET_ID')
-CREDENTIALS_FILE = os.getenv('CREDENTIALS_FILE')
+#CREDENTIALS_FILE = os.getenv('CREDENTIALS_FILE')
 WORKSHEET_NAME = os.getenv('WORKSHEET_NAME')
 
 
@@ -27,8 +29,14 @@ SCOPES = [
 
 def add_or_update_user(telegram_id, username, full_name, phone):
     try:
-       
-        creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
+        creds_b64 = os.getenv("TELEGRAM_CREDENTIALS_BASE64")
+    
+        if not creds_b64:
+            raise ValueError("TELEGRAM_CREDENTIALS_BASE64 not set!")
+        
+        creds_dict = json.loads(base64.b64decode(creds_b64).decode("utf-8"))
+        
+        creds = Credentials.from_service_account_file(creds_dict, scopes=SCOPES)
         client = gspread.authorize(creds)
         sheet = client.open_by_key(SHEET_ID)
 
