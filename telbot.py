@@ -124,9 +124,9 @@ def get_users_for_restore():
 
 
 # ---------- زمان‌بندی سناریو ----------
-DAY_1_DELAY = timedelta(seconds=1)
-DAY_2_DELAY = timedelta(seconds=5)
-DAY_3_DELAY = timedelta(seconds=10)
+DAY_1_DELAY = timedelta(days=1)
+DAY_2_DELAY = timedelta(days=2)
+DAY_3_DELAY = timedelta(days=3)
 
 
 
