@@ -35,7 +35,7 @@ def add_or_update_user(telegram_id, username, full_name, phone):
             raise ValueError("TELEGRAM_CREDENTIALS_BASE64 not set!")
         
         creds_dict = json.loads(base64.b64decode(creds_b64).decode("utf-8"))
-        
+        print(f"📌 client_email: {creds_dict.get('client_email')}")
         creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
         client = gspread.authorize(creds)
         sheet = client.open_by_key(SHEET_ID)
