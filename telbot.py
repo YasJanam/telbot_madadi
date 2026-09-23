@@ -39,19 +39,19 @@ GIFT_LINK = "https://ziresefr.com/"
 DAY_1_MESSAGE = (
     "🎬 روز اول!\n\n"
     "این اولین فیلم آموزشی برای شماست:\n"
-    "https://example.com/video-day-1"
+    "https://ziresefr.org/product/challenge-of-achieving-goals/"
 )
 
 DAY_2_MESSAGE = (
     "🎬 روز دوم!\n\n"
     "فیلم دوم آماده‌ست:\n"
-    "https://example.com/video-day-2"
+    "https://ziresefr.org/product/free-overcome-procrastination/"
 )
 
 DAY_3_MESSAGE = (
     "🎁 روز سوم!\n\n"
-    "تبریک! به پایان سناریو رسیدی. این هم هدیه‌ی نهایی:\n"
-    "https://example.com/final-bonus"
+    "تبریک! این هم هدیه‌ی نهایی:\n"
+    "https://ziresefr.org/courses/sshuman/"
 )
 
 
@@ -266,9 +266,7 @@ async def get_phone(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "✅ ثبت‌نامت با موفقیت انجام شد!\n\n"
         f"👤 نام: {full_name}\n"
         f"📞 شماره: {phone}\n\n"
-        "🎁 این هم هدیه‌ی خوش‌آمدگویی:\n"
-        f"{GIFT_LINK}\n\n"
-        "📅 از امروز، به مدت ۳ روز، هر روز یه محتوای ویژه برات می‌فرستیم. منتظر باش!",
+        "📅 از امروز، به مدت ۳ روز، هر روز یه محتوای ویژه 🎁 برات می‌فرستیم. منتظر باش!",
         reply_markup=ReplyKeyboardRemove(),
     )
 
