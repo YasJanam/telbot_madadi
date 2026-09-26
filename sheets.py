@@ -46,6 +46,7 @@ def add_or_update_user(telegram_id, username, full_name, phone):
 
 
         creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+        
         client = gspread.authorize(creds)
         sheet = client.open_by_key(SHEET_ID)
 
@@ -58,7 +59,7 @@ def add_or_update_user(telegram_id, username, full_name, phone):
        
         if not ws.row_values(1):
             ws.append_row([
-                "Timestamp", "Telegram ID", "Username",
+                "Timestamp", "Telegram ID", "Bale ID" ,"Username",
                 "Full Name", "Phone",
                 "Day 1", "Day 2", "Day 3",
             ])
@@ -70,7 +71,17 @@ def add_or_update_user(telegram_id, username, full_name, phone):
         if str_id in all_ids:
             
             row = all_ids.index(str_id) + 1
-            ws.update(
+
+            ws.update(f"A{row}:B{row}", [[datetime.now().strftime("%Y-%m-%d %H:%M:%S"),str_id]])
+            ws.update(f"D{row}:F{row}", [[
+                
+                username or "",  # D = Username
+                full_name,       # E = Full Name
+                phone,           # F = Phone
+            ]])
+
+
+            """ws.update(
                 f"A{row}:E{row}",
                 [[
                     datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -79,7 +90,7 @@ def add_or_update_user(telegram_id, username, full_name, phone):
                     full_name,
                     phone,
                 ]],
-            )
+            )"""
             print(f"📊 کاربر {telegram_id} آپدیت شد")
             return "updated"
         else:
@@ -87,6 +98,7 @@ def add_or_update_user(telegram_id, username, full_name, phone):
             ws.append_row([
                 datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 str_id,
+                "",
                 username or "",
                 full_name,
                 phone,
